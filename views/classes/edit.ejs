@@ -1,0 +1,14 @@
+<% layout('layouts/boilerplate') %>
+    <h1>Edit Campground</h1>
+    <form action="/classes/<%= cl._id %>?_method=PUT " method="POST">
+        <div>
+            <label for="">Title</label>
+            <input type="text" id='title' name="cl[title]" value='<%= cl.title %> '>
+        </div>
+        <div>
+            <label for="">Description</label>
+            <input type="text" id='title' name="cl[description]" value='<%= cl.description %> '>
+        </div>
+        <button>Update Class</button>
+    </form>
+    <a href="/classes/<%= cl._id %> ">Back to Class</a>

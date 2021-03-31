@@ -17,10 +17,20 @@ db.once("open", () => {
 
 const seedDB = async () => {
     await Class.deleteMany({});
-    const c = new Class({
-        title: `${classes[0].title}, ${classes[0].description}`     
-    })
-    await c.save();
+    for (let i = 0; i < classes.length; i++) {
+        const c = new Class({
+            title: `${classes[i].title}`,
+            description: `${classes[i].description}`,    
+            startTime: `${classes[i].startTime}`,    
+            endTime: `${classes[i].endTime}`,    
+            classType: `${classes[i].classType}`,    
+            classDays: `${classes[i].classDays}`,
+            image: 'https://source.unsplash.com/collection/1781617'    
+        })
+        await c.save();
+    }
 }
 
-seedDB();
+seedDB().then(() => {
+    mongoose.connection.close();
+})

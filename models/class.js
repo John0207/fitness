@@ -10,7 +10,9 @@ const ClassSchema = new Schema({
     },
     startTime: String,
     endTime: String,
-    ageGroup: String, 
+    classType: String,
+    classDays: String,
+    image: String
 
 });
 

@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate') %>
+    <h1>
+        <%=cl.title %>
+    </h1>
+    <h2>
+        <%=cl.description %>
+    </h2>
+    <img src="<%= cl.image %> " alt="image of a class">
+    <p>
+        <a href="/classes/<%=cl._id %>/edit">Edit</a>
+    </p>
+    <p>
+    <form action="/classes/<%=cl._id %>?_method=DELETE" method=POST>
+        <button>Delete</button>
+    </form>
+    </p>
+    <footer>
+        <a href="/classes">All Classes</a>
+    </footer>

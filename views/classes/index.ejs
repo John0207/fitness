@@ -1,0 +1,14 @@
+<% layout('layouts/boilerplate') %> 
+    <h1>All Classes</h1>
+    <div>
+        <a href="/classes/new">Add a Class</a>
+    </div>
+    <ul>
+        <% for (let cl of classes) {%>
+            <li>
+                <a href="/classes/<%= cl._id %>/">
+                    <%= cl.title %>
+                </a>
+            </li>
+            <% } %>
+    </ul>
