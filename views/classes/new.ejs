@@ -1,13 +1,40 @@
 <% layout('layouts/boilerplate') %>
-    <form action="/classes" method="POST">
-        <div>
-            <label for="">Title</label>
-            <input type="text" id='title' name="cl[title]">
+    <div class="row">
+        <h1 class="text-center">New Class</h1>
+        <div class="col-6 offset-3">
+            <form action="/classes" method="POST">
+                <div class='mb-3'>
+                    <label class="form-label" for="title">Title</label>
+                    <input class='form-control' type="text" id='title' name="cl[title]">
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="description">Description</label>
+                    <input class='form-control' type="text" id='description' name="cl[description]">
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="image">Image Url</label>
+                    <input class='form-control' type="text" id='image' name="cl[image]">
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="startTime">Start Time:</label>
+                    <input class='form-control' type="text" id='startTime' name="cl[startTime]">
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="endTime">End Time:</label>
+                    <input class='form-control' type="text" id='endTime' name="cl[endTime]">
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="classDays">Class Days:</label>
+                    <input class='form-control' type="text" id='classDays' name="cl[classDays]">
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="classType">Age Group:</label>
+                    <input class='form-control' type="text" id='classType' name="cl[classType]">
+                </div>
+                <div class="mb-3">
+                    <button class='btn-success'>Add Class</button>
+            </form>
         </div>
-        <div>
-            <label for="">Description</label>
-            <input type="text" id='title' name="cl[description]">
-        </div>
-        <button>Add Class</button>
-    </form>
-    <a href="/classes">All Classes</a>
+        <a href="/classes">All Classes</a>
+    </div>
+    </div>

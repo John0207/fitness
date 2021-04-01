@@ -1,14 +1,30 @@
-<% layout('layouts/boilerplate') %> 
+<% layout('layouts/boilerplate') %>
     <h1>All Classes</h1>
     <div>
         <a href="/classes/new">Add a Class</a>
     </div>
-    <ul>
-        <% for (let cl of classes) {%>
-            <li>
-                <a href="/classes/<%= cl._id %>/">
-                    <%= cl.title %>
-                </a>
-            </li>
-            <% } %>
-    </ul>
+    <% for (let cl of classes) {%>
+        <div class="card" mb-3>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="<%=cl.image %> " alt="" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= cl.title %>
+                        </h5>
+                        <p class="card-text">
+                            <%= cl.description %>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <%= cl.classDays %>
+                            </small>
+                        </p>
+                        <a href="/classes/<%= cl._id %> " class='btn btn-primary'>More on <%= cl.title %> !</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
