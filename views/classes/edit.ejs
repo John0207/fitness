@@ -1,14 +1,44 @@
 <% layout('layouts/boilerplate') %>
-    <h1>Edit Campground</h1>
-    <form action="/classes/<%= cl._id %>?_method=PUT " method="POST">
-        <div>
-            <label for="">Title</label>
-            <input type="text" id='title' name="cl[title]" value='<%= cl.title %> '>
+    <div class="row">
+        <h1 class="text-center">Edit Class</h1>
+        <div class="col-6 offset-3">
+            <form action="/classes/<%= cl._id %>?_method=PUT " method="POST">
+                <div class='mb-3'>
+                    <label class="form-label" for="title">Title</label>
+                    <input class='form-control' type="text" id='title' name="cl[title]" value='<%= cl.title %>'>
+                </div>
+                <div class=' mb-3'>
+                    <label class="form-label" for="description">Description</label>
+                    <input class='form-control' type="text" id='description' name='cl[description]'
+                        value='<%= cl.description %>'>
+                </div>
+                <div class='mb-3'>
+                    <label class=" form-label" for="image">Image Url</label>
+                    <input class='form-control' type="text" id='image' name="cl[image]" value='<%= cl.image %>'>
+                </div>
+                <div class=' mb-3'>
+                    <label class="form-label" for="startTime">Start Time:</label>
+                    <input class='form-control' type="text" id='startTime' name="cl[startTime]"
+                        value='<%= cl.startTime %>'>
+                </div>
+                <div class=' mb-3'>
+                    <label class="form-label" for="endTime">End Time:</label>
+                    <input class='form-control' type="text" id='endTime' name="cl[endTime]" value='<%= cl.endTime %>'>
+                </div>
+                <div class=' mb-3'>
+                    <label class="form-label" for="classDays">Class Days:</label>
+                    <input class='form-control' type="text" id='classDays' name="cl[classDays]"
+                        value='<%= cl.classDays %>'>
+                </div>
+                <div class=' mb-3'>
+                    <label class="form-label" for="classType">Age Group:</label>
+                    <input class='form-control' type="text" id='classType' name="cl[classType]"
+                        value='<%= cl.classType %>'>
+                </div>
+                <div class="mb-3">
+                    <button class=' btn btn-primary'>Update Class</button>
+            </form>
         </div>
-        <div>
-            <label for="">Description</label>
-            <input type="text" id='title' name="cl[description]" value='<%= cl.description %> '>
-        </div>
-        <button>Update Class</button>
-    </form>
-    <a href="/classes/<%= cl._id %> ">Back to Class</a>
+        <a href="/classes/<%= cl._id %> ">Back to Class</a>
+    </div>
+    </div>

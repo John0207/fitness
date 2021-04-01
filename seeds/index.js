@@ -25,7 +25,7 @@ const seedDB = async () => {
             endTime: `${classes[i].endTime}`,    
             classType: `${classes[i].classType}`,    
             classDays: `${classes[i].classDays}`,
-            image: 'https://source.unsplash.com/collection/1781617'    
+            image: 'https://source.unsplash.com/collection/1781617:/1200'    
         })
         await c.save();
     }
