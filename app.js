@@ -43,13 +43,13 @@ app.get('/classes', async (req, res) => {
 
 app.get('/classes/new', (req, res) => {
     res.render('classes/new');
-});
+})
 
 app.post('/classes', async(req, res) => {
     const cl = new Class(req.body.cl);
     await cl.save();
     res.redirect(`/classes/${cl._id}`)
-});
+})
 
 app.get('/classes/:id', async (req, res) => {
     const cl = await Class.findById(req.params.id);
@@ -59,13 +59,13 @@ app.get('/classes/:id', async (req, res) => {
 app.get('/classes/:id/edit', async(req, res) => {
     const cl = await Class.findById(req.params.id);
     res.render('classes/edit', { cl });
-});
+})
 
 app.put('/classes/:id', async(req, res) => {
     const { id } = req.params;
     const cl = await Class.findByIdAndUpdate(id, { ...req.body.cl });
     res.redirect(`/classes/${cl._id}`)
-})
+});
 
 app.delete('/classes/:id', async (req, res) => {
     const { id } = req.params;
