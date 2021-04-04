@@ -45,7 +45,7 @@ module.exports = [
         startTime: '1:00 pm',
         endTime: '2:00 pm',
         classType: 'Ages 6 to 12',
-        classType: 'Weekends',
+        classDays: 'Weekends',
     },
     {
         title: 'advanced jiu jitsu',
@@ -71,4 +71,4 @@ module.exports = [
         classType: '18 and Over',
         classDays: 'Tuesday, Thursday'
     }
-]
+];

@@ -18,7 +18,7 @@ db.once("open", () => {
 const seedDB = async () => {
     await Class.deleteMany({});
     for (let i = 0; i < classes.length; i++) {
-        const c = new Class({
+        const cl = new Class({
             title: `${classes[i].title}`,
             description: `${classes[i].description}`,    
             startTime: `${classes[i].startTime}`,    
@@ -27,7 +27,7 @@ const seedDB = async () => {
             classDays: `${classes[i].classDays}`,
             image: 'https://source.unsplash.com/collection/1781617:/1200'    
         })
-        await c.save();
+        await cl.save();
     }
 }
 
