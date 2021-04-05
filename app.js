@@ -5,6 +5,8 @@ const Class = require('./models/class');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
+const ExpressError = require('./utils/ExpressError');
+const Joi = require('joi');
 
 
 
@@ -36,19 +38,35 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 
-app.get('/classes', async (req, res) => {
+app.get('/classes', catchAsync(async (req, res) => {
     const classes = await Class.find({});
     res.render('classes/index', { classes })
-});
+}));
 
 app.get('/classes/new', (req, res) => {
     res.render('classes/new');
 })
 
 app.post('/classes', catchAsync(async(req, res, next) => {
-        const cl = new Class(req.body.cl);
-        await cl.save();
-        res.redirect(`/classes/${cl._id}`) 
+    const clSchema = Joi.object({
+        cl: Joi.object({
+            title: Joi.string().required(),
+            description: Joi.string().required(),
+            startTime: Joi.string().required(),
+            endTime: Joi.string().required(),
+            classType: Joi.string().required(),
+            classDays: Joi.string().required(),
+            image: Joi.string().required(),
+        }).required()
+    })
+    const { error } = clSchema.validate(req.body);
+    if (error){
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    }
+    const cl = new Class(req.body.cl);
+    await cl.save();
+    res.redirect(`/classes/${cl._id}`) 
 }))
 
 app.get('/classes/:id', catchAsync(async (req, res) => {
@@ -72,6 +90,10 @@ app.delete('/classes/:id', catchAsync( async (req, res) => {
     await Class.findByIdAndDelete(id);
     res.redirect('/classes');
 }));
+
+app.all('*', (req, res, next) => {
+    next(new ExpressError('page not found'), '404')
+})
 
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
