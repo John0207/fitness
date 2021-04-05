@@ -24,9 +24,10 @@ router.get('/new', (req, res) => {
     res.render('classes/new');
 })
 
-router.post('/', validateClass, catchAsync(async(req, res, next) => {    
+router.post('/', validateClass, catchAsync(async(req, res, next) => {
     const cl = new Class(req.body.cl);
     await cl.save();
+    req.flash('success', 'successfully made a new class');  
     res.redirect(`/classes/${cl._id}`) 
 }))
 
@@ -42,6 +43,7 @@ router.get('/:id/edit', catchAsync(async (req, res) => {
 
 router.put('/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
+    req.flash('success', 'successfully updated class');
     const cl = await Class.findByIdAndUpdate(id, { ...req.body.cl });
     res.redirect(`/classes/${cl._id}`)
 }));
@@ -49,6 +51,7 @@ router.put('/:id', catchAsync(async (req, res) => {
 router.delete('/:id', catchAsync( async (req, res) => {
     const { id } = req.params;
     await Class.findByIdAndDelete(id);
+    req.flash('success', 'successfully deleted class');
     res.redirect('/classes');
 }));
 

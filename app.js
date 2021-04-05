@@ -8,6 +8,7 @@ const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const { classSchema } = require('./schemas.js');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 const classes = require('./routes/classes');
 
@@ -41,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 const sessionConfig = {
     secret: 'this should be a better secret',
     resave: false,
-    saveUnintialized: true,
+    saveUninitialized: true,
     cookie: {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
@@ -49,6 +50,13 @@ const sessionConfig = {
     }
 }
 app.use(session(sessionConfig))
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
 
 
 app.use('/classes', classes)
