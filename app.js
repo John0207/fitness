@@ -6,7 +6,7 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-const Joi = require('joi');
+const { classSchema } = require('./schemas.js');
 
 
 
@@ -33,6 +33,15 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+const validateClass = (req, res, next) => {    
+    const { error } = classSchema.validate(req.body);
+    if (error){
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
 
 app.get('/', (req, res) => {
     res.render('home')
@@ -47,23 +56,7 @@ app.get('/classes/new', (req, res) => {
     res.render('classes/new');
 })
 
-app.post('/classes', catchAsync(async(req, res, next) => {
-    const clSchema = Joi.object({
-        cl: Joi.object({
-            title: Joi.string().required(),
-            description: Joi.string().required(),
-            startTime: Joi.string().required(),
-            endTime: Joi.string().required(),
-            classType: Joi.string().required(),
-            classDays: Joi.string().required(),
-            image: Joi.string().required(),
-        }).required()
-    })
-    const { error } = clSchema.validate(req.body);
-    if (error){
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    }
+app.post('/classes', validateClass, catchAsync(async(req, res, next) => {    
     const cl = new Class(req.body.cl);
     await cl.save();
     res.redirect(`/classes/${cl._id}`) 
