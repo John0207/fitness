@@ -33,11 +33,19 @@ router.post('/', validateClass, catchAsync(async(req, res, next) => {
 
 router.get('/:id', catchAsync(async (req, res) => {
     const cl = await Class.findById(req.params.id);
+    if (!cl){
+        req.flash('error', 'Cannot find that class')
+        res.redirect('/classes')
+    }
     res.render('classes/show', { cl });
 }));
 
 router.get('/:id/edit', catchAsync(async (req, res) => {
     const cl = await Class.findById(req.params.id)
+    if (!cl){
+        req.flash('error', 'Cannot find that class')
+        res.redirect('/classes')
+    }
     res.render('classes/edit', { cl });
 }))
 
