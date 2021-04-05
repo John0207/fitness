@@ -7,6 +7,7 @@ const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const { classSchema } = require('./schemas.js');
+const session = require('express-session');
 
 const classes = require('./routes/classes');
 
@@ -36,6 +37,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 
+
+const sessionConfig = {
+    secret: 'this should be a better secret',
+    resave: false,
+    saveUnintialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7     
+    }
+}
+app.use(session(sessionConfig))
 
 
 app.use('/classes', classes)
