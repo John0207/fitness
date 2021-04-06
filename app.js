@@ -1,15 +1,14 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const Class = require('./models/class');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
-const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-const { classSchema } = require('./schemas.js');
 const session = require('express-session');
 const flash = require('connect-flash');
-
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 
 
 const classes = require('./routes/classes');
@@ -53,6 +52,12 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 app.use(flash());
+ 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
     res.locals.success = req.flash('success');
@@ -60,6 +65,11 @@ app.use((req, res, next) => {
     next();
 })
 
+app.get('/fakeUser', async(req, res) => {
+    const user = new User({email: 'John@gmail.com', username: 'Johnnn'});
+    const newUser = await User.register(user, 'chicken');
+    res.send(newUser);
+})
 
 app.use('/classes', classes)
 
