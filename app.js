@@ -11,7 +11,8 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
 
-const classes = require('./routes/classes');
+const classRoutes= require('./routes/classes');
+const userRoutes = require('./routes/users');
 
 
 
@@ -71,7 +72,8 @@ app.get('/fakeUser', async(req, res) => {
     res.send(newUser);
 })
 
-app.use('/classes', classes)
+app.use('/classes', classRoutes)
+app.use('/', userRoutes);
 
 app.get('/', (req, res) => {
     res.render('home')
