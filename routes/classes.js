@@ -4,6 +4,8 @@ const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 const { classSchema } = require('../schemas.js');
 const Class = require('../models/class');
+const { isLoggedIn } = require('../middleware');
+
 
 const validateClass = (req, res, next) => {    
     const { error } = classSchema.validate(req.body);
@@ -20,11 +22,11 @@ router.get('/', catchAsync(async (req, res) => {
     res.render('classes/index', { classes })
 }));
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn,(req, res) => {    
     res.render('classes/new');
 })
 
-router.post('/', validateClass, catchAsync(async(req, res, next) => {
+router.post('/', isLoggedIn, validateClass, catchAsync(async(req, res, next) => {
     const cl = new Class(req.body.cl);
     await cl.save();
     req.flash('success', 'successfully made a new class');  
@@ -40,7 +42,7 @@ router.get('/:id', catchAsync(async (req, res) => {
     res.render('classes/show', { cl });
 }));
 
-router.get('/:id/edit', catchAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
     const cl = await Class.findById(req.params.id)
     if (!cl){
         req.flash('error', 'Cannot find that class')
@@ -56,7 +58,7 @@ router.put('/:id', catchAsync(async (req, res) => {
     res.redirect(`/classes/${cl._id}`)
 }));
 
-router.delete('/:id', catchAsync( async (req, res) => {
+router.delete('/:id', isLoggedIn, catchAsync( async (req, res) => {
     const { id } = req.params;
     await Class.findByIdAndDelete(id);
     req.flash('success', 'successfully deleted class');

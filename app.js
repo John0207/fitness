@@ -10,12 +10,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
-
 const classRoutes= require('./routes/classes');
 const userRoutes = require('./routes/users');
-
-
-
 
 mongoose.connect('mongodb://localhost:27017/fitness', {
     useNewUrlParser: true,
@@ -64,12 +60,6 @@ app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
-})
-
-app.get('/fakeUser', async(req, res) => {
-    const user = new User({email: 'John@gmail.com', username: 'Johnnn'});
-    const newUser = await User.register(user, 'chicken');
-    res.send(newUser);
 })
 
 app.use('/classes', classRoutes)
