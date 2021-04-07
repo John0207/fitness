@@ -22,14 +22,16 @@
                         <%= cl.classType %>
                     </li>
                 </ul>
-                <div class="card-body">
-                    <form action="/classes/<%=cl._id %>/edit" class='d-inline' method=GET>
-                        <button class='btn btn-primary'>Edit</button>
-                    </form>
-                    <form class='d-inline' action="/classes/<%=cl._id %>?_method=DELETE" method=POST>
-                        <button class='btn btn-danger'>Delete</button>
-                    </form>
-                </div>
+                <% if(currentUser) {%>
+                    <div class="card-body">
+                        <form action="/classes/<%=cl._id %>/edit" class='d-inline' method=GET>
+                            <button class='btn btn-primary'>Edit</button>
+                        </form>
+                        <form class='d-inline' action="/classes/<%=cl._id %>?_method=DELETE" method=POST>
+                            <button class='btn btn-danger'>Delete</button>
+                        </form>
+                    </div>
+                    <% } %>
             </div>
         </div>
     </div>
