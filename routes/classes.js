@@ -5,17 +5,10 @@ const ExpressError = require('../utils/ExpressError');
 const { classSchema } = require('../schemas.js');
 const Class = require('../models/class');
 const { isLoggedIn } = require('../middleware');
+const { validateClass } = require('../middleware');
 
 
-const validateClass = (req, res, next) => {    
-    const { error } = classSchema.validate(req.body);
-    if (error){
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
+
 
 router.get('/', catchAsync(async (req, res) => {
     const classes = await Class.find({});
