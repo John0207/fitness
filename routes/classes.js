@@ -51,7 +51,7 @@ router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
     res.render('classes/edit', { cl });
 }))
 
-router.put('/:id', catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, catchAsync(async (req, res) => {
     const { id } = req.params;
     req.flash('success', 'successfully updated class');
     const cl = await Class.findByIdAndUpdate(id, { ...req.body.cl });
