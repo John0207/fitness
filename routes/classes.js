@@ -9,8 +9,6 @@ router.route('/')
     .get(catchAsync(classes.index))
     .post(isLoggedIn, validateClass, catchAsync(classes.createClass))
 
-
-
 router.get('/new', isLoggedIn, classes.renderNewForm)
 
 router.route('/:id')
