@@ -8,7 +8,7 @@ module.exports.classSchema = Joi.object({
         endTime: Joi.string().required(),
         classType: Joi.string().required(),
         classDays: Joi.string().required(),
-        image: Joi.string().required(),
+        // image: Joi.string().required(),
     }).required()
 });
 

@@ -12,7 +12,12 @@ const ClassSchema = new Schema({
     endTime: String,
     classType: String,
     classDays: String,
-    image: String
+    images: [
+        {
+            url: String,
+            filename: String
+        }
+    ]
 
 });
 

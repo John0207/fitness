@@ -11,7 +11,9 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createClass = async(req, res, next) => {
     const cl = new Class(req.body.cl);
+    cl.images = req.files.map(f => ({url: f.path, filename: f.filename }));
     await cl.save();
+    console.log(cl);
     req.flash('success', 'successfully made a new class');  
     res.redirect(`/classes/${cl._id}`) 
 }
@@ -35,9 +37,13 @@ module.exports.renderEditForm = async (req, res) => {
 }
 
 module.exports.updateClass = async (req, res) => {
-    const { id } = req.params;
-    req.flash('success', 'successfully updated class');
+    // could make this more efficient by just using find
+    const { id } = req.params;    
     const cl = await Class.findByIdAndUpdate(id, { ...req.body.cl });
+    const images = req.files.map(f => ({url: f.path, filename: f.filename }));
+    cl.images.push(...images);
+    await cl.save();
+    req.flash('success', 'successfully updated class');
     res.redirect(`/classes/${cl._id}`)
 }
 

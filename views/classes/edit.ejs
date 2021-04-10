@@ -2,7 +2,8 @@
     <div class="row">
         <h1 class="text-center">Edit Class</h1>
         <div class="col-6 offset-3">
-            <form action="/classes/<%= cl._id %>?_method=PUT " method="POST" novalidate class='validated-form'>
+            <form action="/classes/<%= cl._id %>?_method=PUT " method="POST" novalidate class='validated-form'
+                enctype="multipart/form-data">
                 <div class='mb-3'>
                     <label class="form-label" for="title">Title</label>
                     <input class='form-control' type="text" id='title' name="cl[title]" value='<%= cl.title %>'
@@ -15,14 +16,6 @@
                     <label class="form-label" for="description">Description</label>
                     <input class='form-control' type="text" id='description' name='cl[description]'
                         value='<%= cl.description %>' required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-                <div class='mb-3'>
-                    <label class=" form-label" for="image">Image Url</label>
-                    <input class='form-control' type="text" id='image' name="cl[image]" value='<%= cl.image %>'
-                        required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -57,6 +50,18 @@
                         value='<%= cl.classType %>' required>
                     <div class="valid-feedback">
                         Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-file custom-file">
+                        <input type="file" class="form-file-input" id='images' name='images' multiple required>
+                        <label for="images" class="form-file-label">
+                            <span class="form-file-text custom-file-label">Add more image(s)...</span>
+                            <span class="form-file-button">Browse</span>
+                        </label>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3">

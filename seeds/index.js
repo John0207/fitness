@@ -25,7 +25,16 @@ const seedDB = async () => {
             endTime: `${classes[i].endTime}`,    
             classType: `${classes[i].classType}`,    
             classDays: `${classes[i].classDays}`,
-            image: 'https://source.unsplash.com/collection/1781617:/1200'    
+            images:  [
+                {
+                  url: 'https://res.cloudinary.com/dhfwstzxj/image/upload/v1618028100/fitness/nl82puq1b6h1gaiabh0j.jpg',
+                  filename: 'fitness/nl82puq1b6h1gaiabh0j'
+                },
+                {
+                  url: 'https://res.cloudinary.com/dhfwstzxj/image/upload/v1618028100/fitness/sifgjbam0k2tlwoyphsw.jpg',
+                  filename: 'fitness/sifgjbam0k2tlwoyphsw'
+                }
+              ]    
         })
         await cl.save();
     }
