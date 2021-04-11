@@ -14,7 +14,7 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
     console.log("Database connected42069!!!");
 });
-
+// NEED TO UPDATE THIS
 const seedDB = async () => {
     await Class.deleteMany({});
     for (let i = 0; i < classes.length; i++) {

@@ -9,6 +9,7 @@ module.exports.classSchema = Joi.object({
         classType: Joi.string().required(),
         classDays: Joi.string().required(),
         // image: Joi.string().required(),
-    }).required()
+    }).required(),
+    deleteImages: Joi.array()
 });
 

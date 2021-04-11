@@ -1,4 +1,5 @@
 const Class = require('../models/class');
+const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async (req, res) => {
     const classes = await Class.find({});
@@ -38,11 +39,19 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateClass = async (req, res) => {
     // could make this more efficient by just using find
-    const { id } = req.params;    
+    const { id } = req.params; 
+    console.log(req.body);   
     const cl = await Class.findByIdAndUpdate(id, { ...req.body.cl });
-    const images = req.files.map(f => ({url: f.path, filename: f.filename }));
-    cl.images.push(...images);
+    const imgs = req.files.map(f => ({url: f.path, filename: f.filename }));
+    cl.images.push(...imgs);    
     await cl.save();
+    if (req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+        await cl.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages}}}})
+        console.log(cl);
+    }
     req.flash('success', 'successfully updated class');
     res.redirect(`/classes/${cl._id}`)
 }

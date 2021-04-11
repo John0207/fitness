@@ -6,12 +6,12 @@
                 enctype="multipart/form-data">
                 <div class='mb-3'>
                     <label class="form-label" for="title">Title</label>
-                    <input class='form-control' type="text" id='title' name="cl[title]" value='<%= cl.title %>'
-                        required>
+                    <input class='form-control' type="text" id='title' name="cl[title]" value='<%=cl.title%>' required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
+
                 <div class=' mb-3'>
                     <label class="form-label" for="description">Description</label>
                     <input class='form-control' type="text" id='description' name='cl[description]'
@@ -20,41 +20,46 @@
                         Looks good!
                     </div>
                 </div>
+
                 <div class=' mb-3'>
                     <label class="form-label" for="startTime">Start Time:</label>
                     <input class='form-control' type="text" id='startTime' name="cl[startTime]"
-                        value='<%= cl.startTime %>' required>
+                        value='<%=cl.startTime%>' required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
+
                 <div class=' mb-3'>
                     <label class="form-label" for="endTime">End Time:</label>
-                    <input class='form-control' type="text" id='endTime' name="cl[endTime]" value='<%= cl.endTime %>'
+                    <input class='form-control' type="text" id='endTime' name="cl[endTime]" value='<%=cl.endTime%>'
                         required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
+
                 <div class=' mb-3'>
                     <label class="form-label" for="classDays">Class Days:</label>
                     <input class='form-control' type="text" id='classDays' name="cl[classDays]"
-                        value='<%= cl.classDays %>' required>
+                        value='<%=cl.classDays%>' required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
+
                 <div class=' mb-3'>
                     <label class="form-label" for="classType">Age Group:</label>
                     <input class='form-control' type="text" id='classType' name="cl[classType]"
-                        value='<%= cl.classType %>' required>
+                        value='<%=cl.classType%>' required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
+
                 <div class="mb-3">
                     <div class="form-file custom-file">
-                        <input type="file" class="form-file-input" id='images' name='images' multiple required>
+                        <input type="file" class="form-file-input" id='images' name='images' multiple>
                         <label for="images" class="form-file-label">
                             <span class="form-file-text custom-file-label">Add more image(s)...</span>
                             <span class="form-file-button">Browse</span>
@@ -64,10 +69,20 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="mb-3">
-                    <button class=' btn btn-primary'>Update Class</button>
+                    <% cl.images.forEach(function(img, i) {%>
+                        <div class="form-check-inline">
+                            <img src="<%=img.url%>" class='img-thumbnail' alt="">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value='<%=img.filename%>'>
+                        </div>
+                        <label for="image-<%=i%>">Delete?</label>
+                        <%})%>
+                </div>
+                <div class="mb-3">
+                    <button class='btn btn-primary'>Update Class</button>
+                </div>
             </form>
+            <a href="/classes/<%=cl._id%> ">Back to Class</a>
         </div>
-        <a href="/classes/<%= cl._id %> ">Back to Class</a>
-    </div>
     </div>
