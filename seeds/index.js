@@ -25,14 +25,18 @@ const seedDB = async () => {
             endTime: `${classes[i].endTime}`,    
             classType: `${classes[i].classType}`,    
             classDays: `${classes[i].classDays}`,
-            images:  [
+            images:  [                
                 {
-                  url: 'https://res.cloudinary.com/dhfwstzxj/image/upload/v1618028100/fitness/nl82puq1b6h1gaiabh0j.jpg',
-                  filename: 'fitness/nl82puq1b6h1gaiabh0j'
+                  url: 'https://res.cloudinary.com/dhfwstzxj/image/upload/v1618115510/fitness/dvpxamaaqqbzr8munyje.jpg',
+                  filename: 'fitness/mduorbxrruzkap6cbv5i'
                 },
                 {
-                  url: 'https://res.cloudinary.com/dhfwstzxj/image/upload/v1618028100/fitness/sifgjbam0k2tlwoyphsw.jpg',
-                  filename: 'fitness/sifgjbam0k2tlwoyphsw'
+                  url: 'https://res.cloudinary.com/dhfwstzxj/image/upload/v1618115510/fitness/gdwn0kjqzjxcppvfuz0w.jpg',
+                  filename: 'fitness/gdwn0kjqzjxcppvfuz0w'
+                },
+                {
+                    url: 'https://res.cloudinary.com/dhfwstzxj/image/upload/v1618115505/fitness/ghcj1os9bxcbj2lhkwtg.jpg',
+                    filename: 'fitness/ghcj1os9bxcbj2lhkwtg'
                 }
               ]    
         })
