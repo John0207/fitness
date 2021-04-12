@@ -9,7 +9,8 @@ const ImageSchema = new Schema ({
 ImageSchema.virtual('thumbnail').get(function() {
     return this.url.replace('/upload', '/upload/w_200');
 })
-
+// TODO: SHOULD ADD LONG AND SHORT DESCRIPTION
+// USE LONG ON SHOW AND SHORT ON INDEX
 const ClassSchema = new Schema({
     title: String,
     description: {

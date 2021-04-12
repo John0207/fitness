@@ -2,6 +2,8 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
+// TODO: create a classlist page 
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
